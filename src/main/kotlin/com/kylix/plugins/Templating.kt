@@ -10,13 +10,11 @@ fun Application.configureTemplating() {
     routing {
         get("/html-dsl") {
             call.respondHtml {
+                head {
+                    title { "Ktor JWT Auth" }
+                }
                 body {
-                    h1 { +"HTML" }
-                    ul {
-                        for (n in 1..10) {
-                            li { +"$n" }
-                        }
-                    }
+                    h1 { "MBKM Bangsat" }
                 }
             }
         }
