@@ -12,19 +12,12 @@ class JWTTokenService: TokenService {
         claims.forEach {
             token = token.withClaim(it.name, it.value)
         }
-        token = token.withClaim("exp", config.expiresIn)
 
         return token.sign(Algorithm.HMAC256(config.secret))
     }
 
-    override fun invalidate(config: TokenConfig, token: String) {
-        JWT.require(Algorithm.HMAC256(config.secret))
-            .withAudience(config.audience)
-            .withIssuer(config.issuer)
-            .build()
-            .verify(token)
-            .getClaim("exp")
-            .asDate()
-            .time = System.currentTimeMillis()
+    //invalidate token
+    override suspend fun invalidate(token: String, saveToDb: suspend String.() -> Unit) {
+        token.saveToDb()
     }
 }

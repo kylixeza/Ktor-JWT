@@ -17,6 +17,7 @@ val middlewareModule = module {
         Middleware(
             get(),
             get(),
+            get(),
         )
     }
 }

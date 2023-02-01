@@ -1,5 +1,6 @@
 package com.kylix.data
 
+import com.kylix.table.TokenBlacklistTable
 import com.kylix.table.UserTable
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +17,7 @@ class DatabaseFactory(
 		Database.connect(dataSource)
 		transaction {
 			val tables = listOf(
-				UserTable
+				UserTable, TokenBlacklistTable
 			)
 			tables.forEach { table ->
 				SchemaUtils.create(table)

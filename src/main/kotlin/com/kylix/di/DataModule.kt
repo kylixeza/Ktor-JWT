@@ -1,7 +1,9 @@
 package com.kylix.di
 
-import com.kylix.controller.UserController
-import com.kylix.controller.UserControllerImpl
+import com.kylix.controller.token.TokenController
+import com.kylix.controller.token.TokenControllerImpl
+import com.kylix.controller.user.UserController
+import com.kylix.controller.user.UserControllerImpl
 import com.kylix.data.DatabaseFactory
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -43,5 +45,9 @@ val databaseModule = module {
 val controllerModule = module {
 	single<UserController> {
 		UserControllerImpl(get())
+	}
+
+	single<TokenController> {
+		TokenControllerImpl(get())
 	}
 }

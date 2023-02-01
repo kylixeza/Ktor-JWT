@@ -6,8 +6,8 @@ interface TokenService {
         vararg claims: TokenClaim
     ): String
 
-    fun invalidate(
-        config: TokenConfig,
-        token: String
+    suspend fun invalidate(
+        token: String,
+        saveToDb: suspend String.() -> Unit
     )
 }

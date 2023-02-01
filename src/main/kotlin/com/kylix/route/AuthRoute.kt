@@ -1,6 +1,6 @@
 package com.kylix.route
 
-import com.kylix.controller.UserController
+import com.kylix.controller.user.UserController
 import com.kylix.middleware.Middleware
 import com.kylix.model.token.TokenRequest
 import com.kylix.model.token.TokenResponse
@@ -73,28 +73,25 @@ class AuthRoute(
     }
 
     private fun Route.signOut() {
-        post("signout") {
-            val token = try {
-                call.receive<TokenRequest>()
-            } catch (e: Exception) {
-                call buildErrorJson e
-                return@post
+        authenticate {
+            post("signout") {
+                val jwt = call.request.header("Authorization")?.substring("Bearer ".length)
+                middleware.invalidateToken(jwt ?: "")
+                call.buildSuccessJson { "Token invalidated" }
             }
-            middleware.apply { application.invalidateToken(token.token) }
-            call.buildSuccessJson { "Token invalidated" }
         }
     }
 
     private fun Route.getDetailUser() {
         authenticate {
             get("user") {
+                middleware.apply { call.validateToken() }
 
                 val uid = middleware.getClaim<String>(call, "uid")
 
                 val user = kotlin.run {
                     if (uid == null) {
                         call.buildErrorJson(message = "uid not found")
-                        return@get
                     } else {
                         userController.getUserById(uid)
                     }
