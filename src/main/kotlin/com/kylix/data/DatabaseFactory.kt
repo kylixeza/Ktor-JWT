@@ -10,7 +10,7 @@ import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class DatabaseFactory(
-	private val dataSource: HikariDataSource
+	dataSource: HikariDataSource
 ) {
 	
 	init {

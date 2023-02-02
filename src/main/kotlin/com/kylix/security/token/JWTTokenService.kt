@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.kylix.util.Config.tokenConfig
 import io.ktor.server.application.*
-import io.ktor.server.auth.*
 
 class JWTTokenService: TokenService {
     override fun generate(config: TokenConfig, vararg claims: TokenClaim): String {

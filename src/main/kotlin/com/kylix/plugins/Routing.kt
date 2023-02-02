@@ -1,11 +1,10 @@
 package com.kylix.plugins
 
 import com.kylix.route.AuthRoute
-import io.ktor.server.routing.*
-import io.ktor.server.response.*
 import io.ktor.server.application.*
 import io.ktor.server.html.*
-import io.ktor.server.util.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import kotlinx.html.*
 import org.koin.ktor.ext.inject
 
@@ -25,7 +24,7 @@ fun Route.initRoute() {
             head {
                 title { +"Ktor HTML DSL" }
             }
-            body() {
+            body {
                 +"Hello from Ktor that using HTML DSL"
                 p {
                     +"See the documentation at"

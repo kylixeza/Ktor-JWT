@@ -2,7 +2,6 @@ package com.kylix.route
 
 import com.kylix.data.controller.user.UserController
 import com.kylix.middleware.Middleware
-import com.kylix.model.token.TokenRequest
 import com.kylix.model.token.TokenResponse
 import com.kylix.model.user.User
 import com.kylix.model.user.UserRequest
