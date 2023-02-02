@@ -1,13 +1,12 @@
 package com.kylix.security.token
 
+import io.ktor.server.application.*
+
 interface TokenService {
     fun generate(
         config: TokenConfig,
         vararg claims: TokenClaim
     ): String
 
-    suspend fun invalidate(
-        token: String,
-        saveToDb: suspend String.() -> Unit
-    )
+    suspend fun Application.invalidate(token: String, saveToDb: suspend String.() -> Unit)
 }

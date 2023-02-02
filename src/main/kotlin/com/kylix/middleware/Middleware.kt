@@ -42,9 +42,9 @@ class Middleware(
         claims = claims
     )
 
-    suspend fun invalidateToken(token: String) {
-        tokenService.invalidate(token) {
-            tokenController.insertToBlacklist(this)
+    suspend fun Application.invalidateToken(token: String) {
+        tokenService.apply {
+            invalidate(token) { tokenController.insertToBlacklist(this) }
         }
     }
 

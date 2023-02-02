@@ -2,8 +2,10 @@ package com.kylix.controller.user
 
 import com.kylix.data.DatabaseFactory
 import com.kylix.model.user.User
+import com.kylix.model.user.UserResponse
 import com.kylix.table.UserTable
 import com.kylix.util.toUser
+import com.kylix.util.toUserResponse
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 
@@ -18,11 +20,11 @@ class UserControllerImpl(
         }.firstOrNull()
     }
 
-    override suspend fun getUserById(uid: String): User? = dbFactory.dbQuery {
+    override suspend fun getUserById(uid: String): UserResponse? = dbFactory.dbQuery {
         UserTable.select {
             UserTable.uid eq uid
         }.map {
-            it.toUser()
+            it.toUserResponse()
         }.firstOrNull()
     }
 
@@ -33,6 +35,12 @@ class UserControllerImpl(
             it[password] = user.password
             it[salt] = user.salt
         }
+    }
+
+    override suspend fun isUsernameExist(username: String): Boolean = dbFactory.dbQuery {
+        UserTable.select {
+            UserTable.username eq username
+        }.count() > 0
     }
 
 }

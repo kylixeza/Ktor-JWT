@@ -31,6 +31,13 @@ class AuthRoute(
             }
 
             val saltedHash = middleware.hashPassword(user.password)
+
+            val isUsernameExist = userController.isUsernameExist(user.username)
+            if (isUsernameExist) {
+                call.buildErrorJson(message = "username already exist, please use another username")
+                return@post
+            }
+
             userController.insertUser(
                 User(
                     uid = UUID.randomUUID().toString(),
@@ -73,12 +80,12 @@ class AuthRoute(
     }
 
     private fun Route.signOut() {
-        authenticate {
-            post("signout") {
-                val jwt = call.request.header("Authorization")?.substring("Bearer ".length)
-                middleware.invalidateToken(jwt ?: "")
-                call.buildSuccessJson { "Token invalidated" }
+        post("signout") {
+            val jwt = call.request.header("Authorization")?.substring("Bearer ".length)
+            middleware.apply {
+                application.invalidateToken(jwt ?: "")
             }
+            call.buildSuccessJson { "Sign out success" }
         }
     }
 

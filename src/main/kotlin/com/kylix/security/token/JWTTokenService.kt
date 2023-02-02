@@ -2,6 +2,9 @@ package com.kylix.security.token
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
+import com.kylix.util.Config.tokenConfig
+import io.ktor.server.application.*
+import io.ktor.server.auth.*
 
 class JWTTokenService: TokenService {
     override fun generate(config: TokenConfig, vararg claims: TokenClaim): String {
@@ -16,8 +19,17 @@ class JWTTokenService: TokenService {
         return token.sign(Algorithm.HMAC256(config.secret))
     }
 
-    //invalidate token
-    override suspend fun invalidate(token: String, saveToDb: suspend String.() -> Unit) {
+    override suspend fun Application.invalidate(token: String, saveToDb: suspend String.() -> Unit) {
+        try {
+            JWT.require(Algorithm.HMAC256(tokenConfig.secret))
+                .withAudience(tokenConfig.audience)
+                .withIssuer(tokenConfig.issuer)
+                .build()
+                .verify(token)
+            token.saveToDb()
+        } catch (e: Exception) {
+            throw IllegalAccessException(e.toString())
+        }
         token.saveToDb()
     }
 }
