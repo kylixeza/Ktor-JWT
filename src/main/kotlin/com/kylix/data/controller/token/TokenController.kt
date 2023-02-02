@@ -1,4 +1,4 @@
-package com.kylix.controller.token
+package com.kylix.data.controller.token
 
 interface TokenController {
 

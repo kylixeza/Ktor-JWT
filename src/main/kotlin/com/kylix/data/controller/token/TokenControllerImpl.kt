@@ -1,13 +1,13 @@
-package com.kylix.controller.token
+package com.kylix.data.controller.token
 
 import com.kylix.data.DatabaseFactory
-import com.kylix.table.TokenBlacklistTable
+import com.kylix.data.table.TokenBlacklistTable
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 
 class TokenControllerImpl(
     private val dbFactory: DatabaseFactory
-): TokenController{
+): TokenController {
     override suspend fun insertToBlacklist(token: String): Unit = dbFactory.dbQuery {
         TokenBlacklistTable.insert {
             it[TokenBlacklistTable.token] = token

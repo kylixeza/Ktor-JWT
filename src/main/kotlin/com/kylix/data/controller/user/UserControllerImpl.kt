@@ -1,9 +1,9 @@
-package com.kylix.controller.user
+package com.kylix.data.controller.user
 
 import com.kylix.data.DatabaseFactory
 import com.kylix.model.user.User
 import com.kylix.model.user.UserResponse
-import com.kylix.table.UserTable
+import com.kylix.data.table.UserTable
 import com.kylix.util.toUser
 import com.kylix.util.toUserResponse
 import org.jetbrains.exposed.sql.insert

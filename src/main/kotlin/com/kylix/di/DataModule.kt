@@ -1,9 +1,9 @@
 package com.kylix.di
 
-import com.kylix.controller.token.TokenController
-import com.kylix.controller.token.TokenControllerImpl
-import com.kylix.controller.user.UserController
-import com.kylix.controller.user.UserControllerImpl
+import com.kylix.data.controller.token.TokenController
+import com.kylix.data.controller.token.TokenControllerImpl
+import com.kylix.data.controller.user.UserController
+import com.kylix.data.controller.user.UserControllerImpl
 import com.kylix.data.DatabaseFactory
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource

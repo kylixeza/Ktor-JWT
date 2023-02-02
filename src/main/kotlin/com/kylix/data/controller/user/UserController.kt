@@ -1,4 +1,4 @@
-package com.kylix.controller.user
+package com.kylix.data.controller.user
 
 import com.kylix.model.user.User
 import com.kylix.model.user.UserResponse

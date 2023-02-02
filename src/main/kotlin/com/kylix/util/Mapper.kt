@@ -2,7 +2,7 @@ package com.kylix.util
 
 import com.kylix.model.user.User
 import com.kylix.model.user.UserResponse
-import com.kylix.table.UserTable
+import com.kylix.data.table.UserTable
 import org.jetbrains.exposed.sql.ResultRow
 
 fun ResultRow.toUser() = User(

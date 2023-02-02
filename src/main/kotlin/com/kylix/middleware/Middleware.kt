@@ -1,6 +1,6 @@
 package com.kylix.middleware
 
-import com.kylix.controller.token.TokenController
+import com.kylix.data.controller.token.TokenController
 import com.kylix.model.token.TokenResponse
 import com.kylix.route.RouteResponseHelper.buildErrorJson
 import com.kylix.route.RouteResponseHelper.buildSuccessJson

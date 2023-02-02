@@ -1,7 +1,7 @@
 package com.kylix.data
 
-import com.kylix.table.TokenBlacklistTable
-import com.kylix.table.UserTable
+import com.kylix.data.table.TokenBlacklistTable
+import com.kylix.data.table.UserTable
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

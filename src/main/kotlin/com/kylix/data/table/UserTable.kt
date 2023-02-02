@@ -1,4 +1,4 @@
-package com.kylix.table
+package com.kylix.data.table
 
 import org.jetbrains.exposed.sql.Table
 
